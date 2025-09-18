@@ -23,7 +23,13 @@ model Usuario {
   claveHash       String
   tipo_id         Int
   tipo            TipoUsuario @relation(fields: [tipo_id], references: [id])
+  compania_id     Int
+  compania        Compania @relation(fields: [compania_id], references: [id])
+ 
+  obacEmergencias       Emergencia[] @relation("ObacRelacion")
+  tomaDatosEmergencias  Emergencia[] @relation("TomaDatosRelacion")
 
+  abonos          AbonoEmergencia[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -38,3 +44,137 @@ model TipoUsuario {
   usuarios Usuario[]
   @@map("tipos_usuario")
 }
+
+model Compania {
+  id         Int @id @default(autoincrement())
+  compania   String
+  ruta_logo  String
+
+  vehiculos VehiculoCompania[]
+  usuarios Usuario[]
+
+  @@map("companias")
+}
+
+
+model VehiculoCompania {
+  id         Int @id @default(autoincrement())
+  vehiculo   String
+  compania_id Int
+  compania            Compania @relation(fields: [compania_id], references: [id])
+
+  vehiculo_emergencias VehiculoEmergencia[]
+  
+  @@map("vehiculos_compania")
+}
+
+
+// emergencia
+model Emergencia{
+  id              Int @id @default(autoincrement())
+  direccion       String
+  hora_despacho   DateTime
+  hora_6_3        DateTime
+  
+  obac_id         Int
+  obac            Usuario @relation(name:"ObacRelacion", fields: [obac_id], references: [id])
+  
+  toma_datos_id   Int
+  toma_datos      Usuario @relation(name:"TomaDatosRelacion", fields: [toma_datos_id], references: [id])
+  
+  tipo_id         Int
+  tipo            TipoEmergencia @relation(fields: [tipo_id], references: [id])
+
+  tipo_accidente_id         Int
+  tipo_accidente            TipoAccidente @relation(fields: [tipo_accidente_id], references: [id])
+
+  magnitud_id       Int
+  magnitud          Magnitud @relation(fields: [magnitud_id], references: [id])
+
+  clima_id          Int
+  clima          EstadoClimatico@relation(fields: [clima_id], references: [id])
+
+  iluminacion_id    Int
+  iluminacion       TipoIluminacion@relation(fields: [iluminacion_id], references: [id])
+
+  resumen           String
+  peligros          String
+
+  abonos        AbonoEmergencia[]
+  vehiculos     VehiculoEmergencia[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("emergencias")
+}
+
+model AbonoEmergencia{
+  id              Int @id @default(autoincrement())
+  emergencia_id   Int
+  emergencia      Emergencia @relation(fields: [emergencia_id], references: [id])
+
+  usuarios_id     Int
+  usuario         Usuario @relation(fields: [usuarios_id], references: [id])
+  
+  @@map("abonos_emergencia")
+}
+
+model VehiculoEmergencia{
+  id              Int @id @default(autoincrement())
+  emergencia_id   Int
+  emergencia      Emergencia @relation(fields: [emergencia_id], references: [id])
+
+  vehiculo_id     Int
+  vehiculo        VehiculoCompania @relation(fields: [vehiculo_id], references: [id])
+
+  @@map("vehiculos_emergencia")
+}
+
+// tipos asociados a emergencia
+model TipoEmergencia{
+  id            Int @id @default(autoincrement())
+  tipo          String
+  descripcion   String
+
+  emergencias Emergencia[]
+
+  @@map("tipos_emergencia")
+}
+
+model TipoAccidente{
+  id            Int @id @default(autoincrement())
+  tipo          String
+
+  emergencias Emergencia[]
+
+  @@map("tipos_accidente")
+}
+
+model Magnitud{
+  id            Int @id @default(autoincrement())
+  magnitud      String
+
+  emergencias Emergencia[]
+
+  @@map("magnitudes")
+}
+
+model EstadoClimatico{
+  id            Int @id @default(autoincrement())
+  estado      String
+
+  emergencias Emergencia[]
+
+  @@map("estados_climaticos")
+}
+
+model TipoIluminacion{
+  id            Int @id @default(autoincrement())
+  tipo      String
+
+  emergencias Emergencia[]
+
+  @@map("tipos_iluminacion")
+}
+

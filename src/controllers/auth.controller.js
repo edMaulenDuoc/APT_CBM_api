@@ -12,8 +12,10 @@ const baseCookie = {
 
 export const register = async (req, res, next) => {
     try {
-        const { nombre, apellido_pat, apellido_mat, usuario, clave, tipo_id } = req.body;
-        const { perfil, accessToken } = await registerUser({ nombre, apellido_pat, apellido_mat, usuario, clave, tipo_id });
+        console.log(req.body);
+
+        const { nombre, apellido_pat, apellido_mat, usuario, clave, tipo_id, compania_id } = req.body;
+        const { perfil, accessToken } = await registerUser({ nombre, apellido_pat, apellido_mat, usuario, clave, tipo_id, compania_id });
 
         res.cookie(COOKIE_NAME, accessToken, { ...baseCookie, maxAge: 150 * 60 * 1000 });
         res.status(201).json({ perfil });
