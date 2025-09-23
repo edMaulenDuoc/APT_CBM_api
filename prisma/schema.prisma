@@ -78,33 +78,33 @@ model VehiculoCompania {
 model Emergencia{
   id              Int @id @default(autoincrement())
   direccion       String
-  hora_despacho   DateTime
-  hora_6_3        DateTime
+  hora_despacho   DateTime?
+  hora_6_3        DateTime?
   coordenadas     String?
 
-  obac_id         Int
-  obac            Usuario @relation(name:"ObacRelacion", fields: [obac_id], references: [id])
+  obac_id         Int?
+  obac            Usuario? @relation(name:"ObacRelacion", fields: [obac_id], references: [id])
   
-  toma_datos_id   Int
-  toma_datos      Usuario @relation(name:"TomaDatosRelacion", fields: [toma_datos_id], references: [id])
+  toma_datos_id   Int?
+  toma_datos      Usuario? @relation(name:"TomaDatosRelacion", fields: [toma_datos_id], references: [id])
   
   tipo_id         Int
   tipo            TipoEmergencia @relation(fields: [tipo_id], references: [id])
 
-  tipo_accidente_id         Int
-  tipo_accidente            TipoAccidente @relation(fields: [tipo_accidente_id], references: [id])
+  tipo_accidente_id         Int?
+  tipo_accidente            TipoAccidente? @relation(fields: [tipo_accidente_id], references: [id])
 
-  magnitud_id       Int
-  magnitud          Magnitud @relation(fields: [magnitud_id], references: [id])
+  magnitud_id       Int?
+  magnitud          Magnitud? @relation(fields: [magnitud_id], references: [id])
 
-  clima_id          Int
-  clima          EstadoClimatico@relation(fields: [clima_id], references: [id])
+  clima_id          Int?
+  clima          EstadoClimatico? @relation(fields: [clima_id], references: [id])
 
-  iluminacion_id    Int
-  iluminacion       TipoIluminacion@relation(fields: [iluminacion_id], references: [id])
+  iluminacion_id    Int?
+  iluminacion       TipoIluminacion? @relation(fields: [iluminacion_id], references: [id])
 
-  resumen           String
-  peligros          String
+  resumen           String?
+  peligros          String?
 
   abonos        AbonoEmergencia[]
   vehiculos     VehiculoEmergencia[]
@@ -113,8 +113,8 @@ model Emergencia{
 
   apoyos        ApoyoEmergencia[]
   
-  comuna_id     Int
-  comuna        Comuna @relation(fields:[comuna_id], references: [id])
+  comuna_id     Int?
+  comuna        Comuna? @relation(fields:[comuna_id], references: [id])
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -174,7 +174,7 @@ model ApoyoEmergencia{
   Emergencia        Emergencia @relation(fields: [emergencia_id], references: [id])
 
   hora_solicitud    DateTime
-  hora_llegada      DateTime
+  hora_llegada      DateTime?
 
   @@map("apoyos_emergencia")
 }

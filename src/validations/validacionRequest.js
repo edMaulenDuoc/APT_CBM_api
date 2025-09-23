@@ -18,4 +18,26 @@ const validarLogin = (body) => {
     return validar.ejecutarValidaciones(validaciones);
 };
 
-export { validarLogin }
+const validarFormEmergencia = (body) => {
+    const validaciones = [
+        { valor: body.tipo_id, metodo: validar.selecionado, args: ['Tipo de emergencia'] },
+        { valor: body.direccion, metodo: validar.campoVacio, args: ['Dirección'] },
+        { valor: body.direccion, metodo: validar.largoString, args: [5, 100, 'Dirección'] },
+        { valor: body.vehiculos, metodo: validar.arrayVacio, args: ['Unidades a despachar'] },
+    ];
+
+
+    var resultado = validar.ejecutarValidaciones(validaciones);
+
+    if (!resultado.esValido) return resultado;
+
+    const validacionesInstituciones = body.instituciones.map((inst) => ({
+        valor: inst.tipo_apoyo_id, metodo: validar.selecionado, args: ['Tipo de apoyo']
+    }));
+
+    resultado = validar.ejecutarValidaciones(validacionesInstituciones);
+
+    return resultado;
+
+}
+export { validarLogin, validarFormEmergencia }
