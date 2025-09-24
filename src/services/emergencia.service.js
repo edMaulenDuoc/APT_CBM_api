@@ -33,7 +33,12 @@ export const getEmergencias = async () =>
                     id: true,
                     nombre: true
                 }
-            }}
+            },
+            apoyos: true
+        },
+        orderBy: {
+            createdAt: 'desc'
+        }
     });
 
 export const asignarApoyos = async (data) =>
