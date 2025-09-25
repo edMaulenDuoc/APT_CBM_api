@@ -30,7 +30,8 @@ export const getEmergencias = async () =>
                     id: true,
                     nombre: true,
                     apellido_pat: true,
-                    apellido_mat: true
+                    apellido_mat: true,
+                    compania:true
                 }
             },
             toma_datos: {
@@ -65,6 +66,10 @@ export const obtenerEmergenciaPorId = async (id) =>
             apoyos: true
         }
     });
+export const obtenerApoyoPorId = async (institucionId) =>
+    await prisma.apoyoEmergencia.findUnique({
+        where: { id: institucionId }
+    });
 
 export const eliminarVehiculos = async (emergencia_id, vehiculo_ids) =>
     await prisma.vehiculoEmergencia.deleteMany({
@@ -92,4 +97,10 @@ export const eliminarApoyos = async (emergencia_id, apoyo_ids) =>
             emergencia_id,
             id: { in: apoyo_ids }
         }
+    });
+
+export const marcarLlegadaApoyo = async (id) =>
+    await prisma.apoyoEmergencia.update({
+        where: { id },
+        data: { hora_llegada: new Date() }
     });

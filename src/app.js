@@ -8,8 +8,6 @@ const app = express();
 
 const ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
 
-console.log(ORIGIN);
-
 app.use(cors({ origin: ORIGIN, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());

@@ -37,6 +37,8 @@ export const editarEmergencia = async (req, res, next) => {
     try {
         const DatosNuevos = req.body;
 
+        console.log("DatosNuevos", DatosNuevos);
+        
         // Comprueba que la emergencia existe
         const emergencia = await service.obtenerEmergenciaPorId(parseInt(req.params.id));
 
@@ -44,10 +46,11 @@ export const editarEmergencia = async (req, res, next) => {
             return res.status(404).json({ message: "Emergencia no encontrada" });
         }
 
-        // Actualiza direccion y tipo de emergencia
+        // Actualiza direccion, tipo de emergencia y obac si fue modificado
         await service.editarEmergencia(emergencia.id, {
             tipo_id: DatosNuevos.tipo_id,
-            direccion: DatosNuevos.direccion
+            direccion: DatosNuevos.direccion,
+            obac_id: DatosNuevos.obac_id ? parseInt(DatosNuevos.obac_id) : null,
         });
 
         // Actualiza los vehiculos de la emergencia
@@ -55,7 +58,6 @@ export const editarEmergencia = async (req, res, next) => {
 
         // Actualiza los apoyos de la emergencia
         await editarApoyosEmergencia(DatosNuevos.instituciones, emergencia);
-
 
         res.status(200).json({ message: "Emergencia actualizada" });
     } catch (error) {
@@ -81,6 +83,23 @@ export const getEmergencias = async (req, res, next) => {
     }
 };
 
+export const marcarLlegadaInstitucion = async (req, res, next) => {
+    try {
+        const institucionId = parseInt(req.params.id);
+        const institucion = await service.obtenerApoyoPorId(institucionId);
+
+        if (!institucion) {
+            return res.status(404).json({ message: "Institución no encontrada" });
+        }
+
+        // Marca la llegada de la institución
+        await service.marcarLlegadaApoyo(institucionId);
+
+        res.status(200).json({ message: "Llegada de la institución marcada con éxito" });
+    } catch (error) {
+        next(error);
+    }
+};
 
 // Utilidades
 const editarVehiculosEmergencia = async (vehiculosNuevos, emergencia) => {
