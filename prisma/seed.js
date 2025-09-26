@@ -848,9 +848,57 @@ async function main() {
     ]
   });
 
+  // Crear Vehiculos para emergencia
+  await prisma.vehiculoEmergencia.createMany({
+    data: [
+      { emergencia_id: 1, vehiculo_id: 1 },
+      { emergencia_id: 1, vehiculo_id: 2 },
+      { emergencia_id: 2, vehiculo_id: 3 },
+      { emergencia_id: 2, vehiculo_id: 4 },
+      { emergencia_id: 3, vehiculo_id: 5 },
+      { emergencia_id: 3, vehiculo_id: 6 },
+      { emergencia_id: 4, vehiculo_id: 7 },
+      { emergencia_id: 4, vehiculo_id: 8 },
+      { emergencia_id: 5, vehiculo_id: 9 },
+      { emergencia_id: 5, vehiculo_id: 10 },
+      { emergencia_id: 6, vehiculo_id: 11 },
+      { emergencia_id: 6, vehiculo_id: 12 },
+      { emergencia_id: 7, vehiculo_id: 13 },
+      { emergencia_id: 7, vehiculo_id: 14 },
+      { emergencia_id: 8, vehiculo_id: 15 },
+      { emergencia_id: 8, vehiculo_id: 16 },
+      { emergencia_id: 9, vehiculo_id: 1 },
+      { emergencia_id: 9, vehiculo_id: 3 },
+    ]
+  });
+
+  // Crear Apoyos para emergencia
+  await prisma.apoyoEmergencia.createMany({
+    data: [
+      { emergencia_id: 1, tipo_apoyo_id: 1, hora_solicitud: new Date('2024-05-10T14:25:00Z') },
+      { emergencia_id: 1, tipo_apoyo_id: 2, hora_solicitud: new Date('2024-05-10T14:30:00Z') },
+      { emergencia_id: 2, tipo_apoyo_id: 3, hora_solicitud: new Date('2024-05-10T14:35:00Z') },
+      { emergencia_id: 2, tipo_apoyo_id: 4, hora_solicitud: new Date('2024-05-10T14:40:00Z') },
+      { emergencia_id: 3, tipo_apoyo_id: 5, hora_solicitud: new Date('2024-05-10T14:45:00Z') },
+      { emergencia_id: 3, tipo_apoyo_id: 6, hora_solicitud: new Date('2024-05-10T14:50:00Z') },
+      { emergencia_id: 4, tipo_apoyo_id: 7, hora_solicitud: new Date('2024-05-10T14:55:00Z') },
+      { emergencia_id: 4, tipo_apoyo_id: 8, hora_solicitud: new Date('2024-05-10T15:00:00Z') },
+      { emergencia_id: 5, tipo_apoyo_id: 9, hora_solicitud: new Date('2024-05-10T15:05:00Z') },
+      { emergencia_id: 5, tipo_apoyo_id: 10, hora_solicitud: new Date('2024-05-10T15:10:00Z') },
+      { emergencia_id: 6, tipo_apoyo_id: 11, hora_solicitud: new Date('2024-05-10T15:15:00Z') },
+      { emergencia_id: 6, tipo_apoyo_id: 12, hora_solicitud: new Date('2024-05-10T15:20:00Z') },
+      { emergencia_id: 7, tipo_apoyo_id: 13, hora_solicitud: new Date('2024-05-10T15:25:00Z') },
+      { emergencia_id: 7, tipo_apoyo_id: 14, hora_solicitud: new Date('2024-05-10T15:30:00Z') },
+      { emergencia_id: 8, tipo_apoyo_id: 15, hora_solicitud: new Date('2024-05-10T15:35:00Z') },
+      { emergencia_id: 8, tipo_apoyo_id: 16, hora_solicitud: new Date('2024-05-10T15:40:00Z') },
+      { emergencia_id: 9, tipo_apoyo_id: 1, hora_solicitud: new Date('2024-05-10T15:45:00Z') },
+      { emergencia_id: 9, tipo_apoyo_id: 3, hora_solicitud: new Date('2024-05-10T15:50:00Z') },
+    ]
+  });
 
   console.log("✅ Seed ejecutado correctamente dentro de una transacción");
 }
+
 
 main()
   .catch((e) => {

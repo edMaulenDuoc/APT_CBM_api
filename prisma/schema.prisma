@@ -21,6 +21,10 @@ model Usuario {
   apellido_mat    String
   usuario         String  @unique
   claveHash       String
+  direccion       String?
+  rut             String?
+  telefono        String?
+  correo          String?
   tipo_id         Int
   tipo            TipoUsuario @relation(fields: [tipo_id], references: [id])
   compania_id     Int
