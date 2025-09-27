@@ -22,7 +22,11 @@ export const getEmergencias = async () =>
             comuna: true,
             vehiculos: {
                 include: {
-                    vehiculo: true
+                    vehiculo: {
+                        include: {
+                            compania: true
+                        }
+                    }
                 }
             },
             obac: {

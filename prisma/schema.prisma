@@ -33,17 +33,29 @@ model Usuario {
   obacEmergencias       Emergencia[] @relation("ObacRelacion")
   tomaDatosEmergencias  Emergencia[] @relation("TomaDatosRelacion")
 
-  obacTurno     Turno[] @relation("ObacTurnoRelacion")
-  conductorTurno Turno[] @relation("ConductorTurnoRelacion")
+  obacTurno       Turno[] @relation("ObacTurnoRelacion")
+  conductorTurno  Turno[] @relation("ConductorTurnoRelacion")
 
-  turnos        TurnoUsuario[]
+  cargo_id        Int?
+  cargo           Cargo? @relation(fields: [cargo_id], references: [id])
+  
+  turnos          TurnoUsuario[]
   
   abonos          AbonoEmergencia[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
 
   @@map("usuarios")
+}
+
+model Cargo {
+  id          Int @id @default(autoincrement())
+  cargo       String
+
+  usuarios    Usuario[]
+
+  @@map("cargos")
 }
 
 model TipoUsuario {

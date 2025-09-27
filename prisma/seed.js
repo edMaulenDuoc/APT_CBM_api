@@ -7,29 +7,36 @@ async function main() {
   await prisma.tipoUsuario.createMany({
     data: [
       { tipo: 'Administrador' },
-      { tipo: 'Voluntario Fundador' },
-      { tipo: 'Director Honorario' },
-      { tipo: 'Voluntario Insigne' },
-      { tipo: 'Voluntario Honorario' },
-      { tipo: 'Vicesuperintendente' },
-      { tipo: 'Tesorero General' },
-      { tipo: 'Inspector Comandancia' },
-      { tipo: 'Tercer Comandante' },
-      { tipo: 'Voluntaria Honoraria' },
-      { tipo: 'Director' },
-      { tipo: 'Voluntario Activo' },
-      { tipo: 'Suspendido' },
-      { tipo: 'Ayudante de Comandancia' },
-      { tipo: 'Teniente 1°' },
-      { tipo: 'Renunciado' },
-      { tipo: 'Capitán' },
-      { tipo: 'Maquinista' },
-      { tipo: 'Teniente 2°' },
-      { tipo: 'Secretaria' },
-      { tipo: 'Tesorero' },
-      { tipo: 'Ayudante' },
-      { tipo: 'Teniente 3°' },
-      { tipo: 'Expulsado' }
+      { tipo: 'Central' },
+      { tipo: 'Voluntario'}
+    ]
+  });
+
+  await prisma.cargo.createMany({
+    data: [
+      { cargo: 'Voluntario Fundador' },
+      { cargo: 'Director Honorario' },
+      { cargo: 'Voluntario Insigne' },
+      { cargo: 'Voluntario Honorario' },
+      { cargo: 'Vicesuperintendente' },
+      { cargo: 'Tesorero General' },
+      { cargo: 'Inspector Comandancia' },
+      { cargo: 'Tercer Comandante' },
+      { cargo: 'Voluntaria Honoraria' },
+      { cargo: 'Director' },
+      { cargo: 'Voluntario Activo' },
+      { cargo: 'Suspendido' },
+      { cargo: 'Ayudante de Comandancia' },
+      { cargo: 'Teniente 1°' },
+      { cargo: 'Renunciado' },
+      { cargo: 'Capitán' },
+      { cargo: 'Maquinista' },
+      { cargo: 'Teniente 2°' },
+      { cargo: 'Secretaria' },
+      { cargo: 'Tesorero' },
+      { cargo: 'Ayudante' },
+      { cargo: 'Teniente 3°' },
+      { cargo: 'Conductor' },
     ]
   });
 
@@ -104,7 +111,8 @@ async function main() {
         usuario: 'admin',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56', // password
         tipo_id: 1, // Administrador
-        compania_id: 1
+        compania_id: 1,
+        cargo_id: 1
       },
       {
         nombre: 'Juan',
@@ -112,8 +120,9 @@ async function main() {
         apellido_mat: 'López',
         usuario: 'jlperez',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 12, // Voluntario Activo
-        compania_id: 2
+        tipo_id: 3, // Voluntario Activo
+        compania_id: 2,
+        cargo_id: 3
       },
       {
         nombre: 'María',
@@ -121,8 +130,9 @@ async function main() {
         apellido_mat: 'Salas',
         usuario: 'mgomez',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 11, // Director
-        compania_id: 3
+        tipo_id: 3, // Director
+        compania_id: 3,
+        cargo_id: 3
       },
       {
         nombre: 'Pedro',
@@ -130,8 +140,9 @@ async function main() {
         apellido_mat: 'Castro',
         usuario: 'pruiz',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 17, // Capitán
-        compania_id: 4
+        tipo_id: 3, // Capitán
+        compania_id: 4,
+        cargo_id: 3
       },
       {
         nombre: 'Lucía',
@@ -139,8 +150,9 @@ async function main() {
         apellido_mat: 'Vargas',
         usuario: 'lfernandez',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 5, // Voluntario Honorario
-        compania_id: 5
+        tipo_id: 3, // Voluntario Honorario
+        compania_id: 5,
+        cargo_id: 3
       },
       {
         nombre: 'Carlos',
@@ -148,8 +160,9 @@ async function main() {
         apellido_mat: 'Méndez',
         usuario: 'csoto',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 18, // Maquinista
-        compania_id: 6
+        tipo_id: 3, // Maquinista
+        compania_id: 6,
+        cargo_id: 3
       },
       {
         nombre: 'Ana',
@@ -157,8 +170,9 @@ async function main() {
         apellido_mat: 'Ruiz',
         usuario: 'amorales',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 20, // Secretaria
-        compania_id: 7
+        tipo_id: 3, // Secretaria
+        compania_id: 7,
+        cargo_id: 3
       },
       {
         nombre: 'Diego',
@@ -166,8 +180,9 @@ async function main() {
         apellido_mat: 'Núñez',
         usuario: 'dalvarez',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 2, // Voluntario Fundador
-        compania_id: 8
+        tipo_id: 3, // Voluntario Fundador
+        compania_id: 8,
+        cargo_id: 3
       },
       {
         nombre: 'Sofía',
@@ -175,7 +190,7 @@ async function main() {
         apellido_mat: 'Ortiz',
         usuario: 'scastillo',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 10, // Voluntaria Honoraria
+        tipo_id: 3, // Voluntaria Honoraria
         compania_id: 3
       },
       {
@@ -184,7 +199,7 @@ async function main() {
         apellido_mat: 'Sánchez',
         usuario: 'rherrera',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 21, // Tesorero
+        tipo_id: 3, // Tesorero
         compania_id: 4
       },
       {
@@ -193,7 +208,7 @@ async function main() {
         apellido_mat: 'Medina',
         usuario: 'erios',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 14, // Ayudante de Comandancia
+        tipo_id: 3, // Ayudante de Comandancia
         compania_id: 2
       },
       {
@@ -202,7 +217,7 @@ async function main() {
         apellido_mat: 'Vega',
         usuario: 'mtorres',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 15, // Teniente 1°
+        tipo_id: 3, // Teniente 1°
         compania_id: 5
       },
       {
@@ -211,7 +226,7 @@ async function main() {
         apellido_mat: 'Reyes',
         usuario: 'pnavarro',
         claveHash: '$2b$10$QAnZl/HAMoK1ltWiPjUvh.zDWJDB86Zs3wuGeToelCmUngqwYea56',
-        tipo_id: 24, // Expulsado
+        tipo_id: 3, // Expulsado
         compania_id: 6
       }
     ]
