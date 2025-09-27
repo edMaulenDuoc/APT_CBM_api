@@ -26,3 +26,21 @@ export const getTiposEmergencia = async (req, res, next) => {
         next(error);
     }
 };
+
+export const getTiposUsuario = async (req, res, next) => {
+    try{
+        const tiposUsuario = await service.getTiposUsuario();
+        res.status(200).json({ tiposUsuario});
+    } catch (error) {
+        next(error);
+    }
+};
+
+export const getCompaniasDropDown = async (req, res, next ) => {
+    try{
+        const companiasDropDown = await service.getCompaniasDropDown()
+        res.status(200).json({ companiasDropDown});
+    } catch (error) {
+        next(error);
+    }
+};

@@ -21,3 +21,7 @@ export const getTiposApoyo = async () => prisma.tipoApoyo.findMany();
 
 
 export const getTiposEmergencia = async () => prisma.tipoEmergencia.findMany();
+
+export const getTiposUsuario = async () => prisma.tipoUsuario.findMany();
+
+export const getCompaniasDropDown = async () => prisma.compania.findMany();
